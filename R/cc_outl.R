@@ -134,7 +134,7 @@ cc_outl <- function(x,
            ids = return(1:nrow(x)))
   }
 
-  record_numbers <- unlist(apply(splist, nrow))
+  record_numbers <- unlist(lapply(splist, nrow))
 
   if(any(record_numbers >= 10000) | thinning){
     warning("Using raster approximation.")
