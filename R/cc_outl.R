@@ -134,7 +134,9 @@ cc_outl <- function(x,
            ids = return(1:nrow(x)))
   }
 
-  if(any(test >= 10000) | thinning){
+  record_numbers <- unlist(apply(splist, nrow))
+
+  if(any(record_numbers >= 10000) | thinning){
     warning("Using raster approximation.")
     # create a raster with extent similar to all points, 
     # and unique IDs as cell values
@@ -150,7 +152,7 @@ cc_outl <- function(x,
     # calculate the distance matrix between all points for the outlier tests
     ## for small datasets and without thinning, 
     ## simply a distance matrix using geospheric distance
-    if(any(nrow(k) >= 10000 | thinning)){ 
+    if(nrow(k) >= 10000 | thinning){ 
       # raster approximation for large datasets and thinning
       # get a distance matrix of raster midpoints, with the row 
       # and colnames giving the cell IDs
